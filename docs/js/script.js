@@ -1,12 +1,48 @@
-let count = 0;
+const run = document.getElementById('run');
+const counter = document.querySelector('.counter');
+const multiplier = document.getElementById('multiplier');
+const autoclick = document.getElementById('autoclick');
 
-document.getElementById('run').addEventListener('click', function(){
-    count += 1;
-    console.log(count);
-    document.querySelector('.counter').innerHTML = count;
-})
-document.getElementById('multiplier').addEventListener('click', function(){
-    count *= 2;
-    console.log(count);
-    document.querySelector('.counter').innerHTML = count;
+let count = 0;
+let increment = 1;
+let multiplierIndex = 2;
+let price = 100;
+
+multiplier.style.display = 'none';
+
+run.addEventListener('click', function(){
+    count += increment;
+    counter.innerHTML = count;
+
+    if (count >= price) {
+        multiplier.style.display = 'block';
+    }
+});
+
+multiplier.addEventListener('click', function(){
+    increment *= multiplierIndex;
+
+    if (count >= price) {
+        count -= price;
+    }
+
+    counter.innerHTML = count;
+
+    price *= multiplierIndex;
+
+    if (count < price) {
+        multiplier.style.display = 'none';
+    }
+
+    multiplierIndex += 1;
+
+    multiplier.innerHTML = `${price} points for multiply by ${multiplierIndex}`
+
+});
+let interval = null;
+autoclick.addEventListener('click', function(){
+    clearInterval(interval);
+    interval=setInterval(() => {
+        run.click();
+    }, 10000);
 })
