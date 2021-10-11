@@ -37,27 +37,41 @@ main {
 
 .left {
     grid-column: 1 / 2;
-    background: url(https://cdn.pixabay.com/photo/2017/01/11/17/19/heart-1972379_1280.png);
+    background: url();
     background-color: var(--bg-left);
-    background-position: center;
+    background-position:bottom;
     background-size: contain;
     background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+h1 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    color: var(--clr-text-left);
+    font-size: 3rem;
+
+    transform: translate(-50%, 0);
 }
 
 .counter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     color: var(--clr-text-left);
     font-size: 8rem;
+
+    transform: translate(-50%, -50%);
 }
 
 .right {
     grid-column: 2 / 3;
-    background-color: var(--bg-right);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+    background-color: var(--bg-right);
 }
 
 .top_right {
@@ -81,9 +95,9 @@ main {
 }
 
 .bottom_right img {
+    grid-column: 1 / 2;
     position: relative;
     left: 50%;
-    grid-column: 1 / 2;
 }
 
 .bottom_right label {
