@@ -62,7 +62,7 @@ h1 {
     left: 50%;
     color: var(--clr-text-left);
     font-size: 8rem;
-
+  
     transform: translate(-50%, -50%);
 }
 
