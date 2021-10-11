@@ -3,6 +3,9 @@ const counter = document.querySelector('.counter');
 const multiplier = document.getElementById('multiplier');
 const autoclick = document.getElementById('autoclick');
 const timer = document.getElementById('timer');
+const l_multiplier = document.querySelector('.label_m')
+const l_autoclick = document.querySelector('.label_a')
+const l_timer = document.querySelector('.label_t')
 
 let count = 0;
 let increment = 1;
@@ -11,14 +14,15 @@ let multiplierPrice = 100;
 
 let intervalAC = null;
 let intervalT = null;
+let settimeoutT = null;
 
 multiplier.style.pointerEvents = 'none';
 autoclick.style.pointerEvents = 'none';
 timer.style.pointerEvents = 'none';
 
-multiplier.style.opacity = '0.65';
-autoclick.style.opacity = '0.65';
-timer.style.opacity = '0.65';
+multiplier.style.opacity = '0.5';
+autoclick.style.opacity = '0.5';
+timer.style.opacity = '0.5';
 
 run.addEventListener('click', function(){
     count += increment;
@@ -48,17 +52,17 @@ multiplier.addEventListener('click', function(){
 
     if (count < ((multiplierPrice * 3) / 4)) {
         timer.style.pointerEvents = "none";
-        timer.style.opacity = '0.65';
+        timer.style.opacity = '0.5';
 
         if (count < multiplierPrice) {
             multiplier.style.pointerEvents = 'none';
-            multiplier.style.opacity = '0.65';
+            multiplier.style.opacity = '0.5';
         }
     }
 
     multiplierIndex += 1;
 
-    multiplier.innerHTML = `${multiplierPrice} points for multiply by ${multiplierIndex}`
+    l_multiplier.innerHTML = `${multiplierPrice} points for multiply by ${multiplierIndex}`
 
     if (multiplierIndex === 5) {
         autoclick.style.pointerEvents = "all";
@@ -72,26 +76,30 @@ autoclick.addEventListener('click', function(){
         run.click();
     }, 10000);
     autoclick.style.pointerEvents = "none";
-    autoclick.style.opacity = '0.65';
+    autoclick.style.opacity = '0.5';
 })
 
 timer.addEventListener('click', function(){
     let timeRest = 29;
-
     increment *= 2;
+
+    clearInterval(intervalT);
+    clearTimeout(settimeoutT);
+
+    l_timer.innerHTML = `30 seconds`;
 
     intervalT = setInterval(() => {
         timer.style.pointerEvents = 'all';
         timer.style.opacity = '1';
-        timer.innerHTML = `${timeRest} seconds`;
+        l_timer.innerHTML = `${timeRest} seconds`;
         timeRest -= 1;
     }, 1000);
 
-    setTimeout(() => {
+    settimeoutT = setTimeout(() => {
         clearInterval(intervalT);
         timer.style.pointerEvents = 'none';
-        timer.style.opacity = '0.65';
+        timer.style.opacity = '0.5';
         increment /= 2;
-        timer.innerHTML = `30 seconds`;
+        l_timer.innerHTML = `30 seconds`;
     }, 30000);
 })
