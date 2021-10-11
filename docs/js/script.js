@@ -12,19 +12,25 @@ let multiplierPrice = 100;
 let intervalAC = null;
 let intervalT = null;
 
-multiplier.style.display = 'none';
-autoclick.style.display = 'none';
-timer.style.display = 'none';
+multiplier.style.pointerEvents = 'none';
+autoclick.style.pointerEvents = 'none';
+timer.style.pointerEvents = 'none';
+
+multiplier.style.opacity = '0.65';
+autoclick.style.opacity = '0.65';
+timer.style.opacity = '0.65';
 
 run.addEventListener('click', function(){
     count += increment;
     counter.innerHTML = count;
     
     if (count >= ((multiplierPrice * 3) / 4)) {
-        timer.style.display = "block";
+        timer.style.pointerEvents = "all";
+        timer.style.opacity = "1";
 
         if (count >= multiplierPrice) {
-            multiplier.style.display = 'block';
+            multiplier.style.pointerEvents = 'all';
+            multiplier.style.opacity = "1";
         }
     }
 });
@@ -41,10 +47,12 @@ multiplier.addEventListener('click', function(){
     multiplierPrice *= multiplierIndex;
 
     if (count < ((multiplierPrice * 3) / 4)) {
-        timer.style.display = "none";
+        timer.style.pointerEvents = "none";
+        timer.style.opacity = '0.65';
 
         if (count < multiplierPrice) {
-            multiplier.style.display = 'none';
+            multiplier.style.pointerEvents = 'none';
+            multiplier.style.opacity = '0.65';
         }
     }
 
@@ -53,7 +61,8 @@ multiplier.addEventListener('click', function(){
     multiplier.innerHTML = `${multiplierPrice} points for multiply by ${multiplierIndex}`
 
     if (multiplierIndex === 5) {
-        autoclick.style.display = "block";
+        autoclick.style.pointerEvents = "all";
+        autoclick.style.opacity = '1';
     }
 });
 
@@ -62,7 +71,8 @@ autoclick.addEventListener('click', function(){
     intervalAC = setInterval(() => {
         run.click();
     }, 10000);
-    autoclick.style.display = "none";
+    autoclick.style.pointerEvents = "none";
+    autoclick.style.opacity = '0.65';
 })
 
 timer.addEventListener('click', function(){
@@ -71,14 +81,16 @@ timer.addEventListener('click', function(){
     increment *= 2;
 
     intervalT = setInterval(() => {
-        timer.style.display = 'block';
+        timer.style.pointerEvents = 'all';
+        timer.style.opacity = '1';
         timer.innerHTML = `${timeRest} seconds`;
         timeRest -= 1;
     }, 1000);
 
     setTimeout(() => {
         clearInterval(intervalT);
-        timer.style.display = 'none';
+        timer.style.pointerEvents = 'none';
+        timer.style.opacity = '0.65';
         increment /= 2;
         timer.innerHTML = `30 seconds`;
     }, 30000);
