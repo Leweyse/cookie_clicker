@@ -47,6 +47,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+
 }
 
 .bottom_right {
@@ -55,4 +57,5 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
 }
