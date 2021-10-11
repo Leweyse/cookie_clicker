@@ -19,9 +19,29 @@ main {
 
 .left {
     grid-column: 1 / 2;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter {
+    font-size: 10rem;
+    
 }
 
 .right {
     grid-column: 2 / 3;
+    background-color: bisque;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
+.top_right {
+    grid-row: 1 / 2;
+}
+
+.bottom_right {
+    grid-row: 2 / 3;
+}
