@@ -3,6 +3,9 @@ const counter = document.querySelector('.counter');
 const multiplier = document.getElementById('multiplier');
 const autoclick = document.getElementById('autoclick');
 const timer = document.getElementById('timer');
+const l_multiplier = document.querySelector('.label_m')
+const l_autoclick = document.querySelector('.label_a')
+const l_timer = document.querySelector('.label_t')
 
 let count = 0;
 let increment = 1;
@@ -58,7 +61,7 @@ multiplier.addEventListener('click', function(){
 
     multiplierIndex += 1;
 
-    multiplier.innerHTML = `${multiplierPrice} points for multiply by ${multiplierIndex}`
+    l_multiplier.innerHTML = `${multiplierPrice} points for multiply by ${multiplierIndex}`
 
     if (multiplierIndex === 5) {
         autoclick.style.pointerEvents = "all";
@@ -76,6 +79,9 @@ autoclick.addEventListener('click', function(){
 })
 
 timer.addEventListener('click', function(){
+    clearInterval(intervalT);
+    l_timer.innerHTML = `30 seconds`;
+    
     let timeRest = 29;
 
     increment *= 2;
@@ -83,7 +89,7 @@ timer.addEventListener('click', function(){
     intervalT = setInterval(() => {
         timer.style.pointerEvents = 'all';
         timer.style.opacity = '1';
-        timer.innerHTML = `${timeRest} seconds`;
+        l_timer.innerHTML = `${timeRest} seconds`;
         timeRest -= 1;
     }, 1000);
 
@@ -92,6 +98,6 @@ timer.addEventListener('click', function(){
         timer.style.pointerEvents = 'none';
         timer.style.opacity = '0.65';
         increment /= 2;
-        timer.innerHTML = `30 seconds`;
+        l_timer.innerHTML = `30 seconds`;
     }, 30000);
 })
