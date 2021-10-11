@@ -14,14 +14,15 @@ let multiplierPrice = 100;
 
 let intervalAC = null;
 let intervalT = null;
+let settimeoutT = null;
 
 multiplier.style.pointerEvents = 'none';
 autoclick.style.pointerEvents = 'none';
 timer.style.pointerEvents = 'none';
 
-multiplier.style.opacity = '0.65';
-autoclick.style.opacity = '0.65';
-timer.style.opacity = '0.65';
+multiplier.style.opacity = '0.5';
+autoclick.style.opacity = '0.5';
+timer.style.opacity = '0.5';
 
 run.addEventListener('click', function(){
     count += increment;
@@ -51,11 +52,11 @@ multiplier.addEventListener('click', function(){
 
     if (count < ((multiplierPrice * 3) / 4)) {
         timer.style.pointerEvents = "none";
-        timer.style.opacity = '0.65';
+        timer.style.opacity = '0.5';
 
         if (count < multiplierPrice) {
             multiplier.style.pointerEvents = 'none';
-            multiplier.style.opacity = '0.65';
+            multiplier.style.opacity = '0.5';
         }
     }
 
@@ -75,16 +76,17 @@ autoclick.addEventListener('click', function(){
         run.click();
     }, 10000);
     autoclick.style.pointerEvents = "none";
-    autoclick.style.opacity = '0.65';
+    autoclick.style.opacity = '0.5';
 })
 
 timer.addEventListener('click', function(){
-    clearInterval(intervalT);
-    l_timer.innerHTML = `30 seconds`;
-    
     let timeRest = 29;
-
     increment *= 2;
+
+    clearInterval(intervalT);
+    clearTimeout(settimeoutT);
+
+    l_timer.innerHTML = `30 seconds`;
 
     intervalT = setInterval(() => {
         timer.style.pointerEvents = 'all';
@@ -93,10 +95,10 @@ timer.addEventListener('click', function(){
         timeRest -= 1;
     }, 1000);
 
-    setTimeout(() => {
+    settimeoutT = setTimeout(() => {
         clearInterval(intervalT);
         timer.style.pointerEvents = 'none';
-        timer.style.opacity = '0.65';
+        timer.style.opacity = '0.5';
         increment /= 2;
         l_timer.innerHTML = `30 seconds`;
     }, 30000);
