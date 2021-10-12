@@ -38,7 +38,7 @@ run.addEventListener('click', function(){
         }
     }
 
-    if (l_timer.innerHTML !== "30 seconds") {
+    if (l_timer.innerHTML !== "10 seconds") {
         timer.style.pointerEvents = 'none';
         timer.style.opacity = '0.4';
     }
@@ -85,16 +85,16 @@ autoclick.addEventListener('click', function(){
 })
 
 timer.addEventListener('click', function(){
+    l_timer.innerHTML = `10 seconds `;
+
     timer.style.pointerEvents = 'none';
     timer.style.opacity = '0.4';
 
-    let timeRest = 29;
+    let timeRest = 9;
     increment *= 2;
 
     clearInterval(intervalT);
     clearTimeout(settimeoutT);
-
-    l_timer.innerHTML = `30 seconds`;
 
     intervalT = setInterval(() => {
         l_timer.innerHTML = `${timeRest} seconds`;
@@ -104,11 +104,11 @@ timer.addEventListener('click', function(){
     settimeoutT = setTimeout(() => {
         clearInterval(intervalT);
         increment /= 2;
-        l_timer.innerHTML = `30 seconds`;
+        l_timer.innerHTML = `10 seconds`;
 
         if (count >= ((multiplierPrice * 3) / 4)) {
             timer.style.pointerEvents = "all";
             timer.style.opacity = "1";
         }
-    }, 30000);
+    }, 10000);
 })
