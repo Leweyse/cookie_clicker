@@ -8,7 +8,7 @@ const l_autoclick = document.querySelector('.label_a')
 const l_timer = document.querySelector('.label_t')
 
 let count = 0;
-let increment = 10;
+let increment = 1;
 let multiplierIndex = 2;
 let multiplierPrice = 100;
 
