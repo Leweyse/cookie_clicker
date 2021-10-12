@@ -6,6 +6,7 @@ const timer = document.getElementById('timer');
 const l_multiplier = document.querySelector('.label_m')
 const l_autoclick = document.querySelector('.label_a')
 const l_timer = document.querySelector('.label_t')
+const aniFlower = document.getElementById('animateFlower')
 
 let count = 0;
 let increment = 1;
@@ -15,6 +16,36 @@ let multiplierPrice = 100;
 let intervalAC = null;
 let intervalT = null;
 let settimeoutT = null;
+
+var id = null;
+var horizon = document.body.clientWidth;
+var vertical = document.body.clientHeight;
+let leftPoint = 0;
+let topPoint = 0;
+
+clearInterval(id);
+id_top = setInterval(frameTop, 5);
+function frameTop() {
+    if (topPoint == vertical - 80){
+        clearInterval(id_top)
+        aniFlower.style.display = 'none';
+    }else{
+        topPoint++;
+        aniFlower.style.top = topPoint + 'px';
+    }
+}
+id_left = setInterval(frameLeft, 5);
+function frameLeft() {
+    if (leftPoint == horizon/2 - 80){
+        clearInterval(id);
+    }else{
+        leftPoint++;
+        aniFlower.style.left = leftPoint + 'px'
+    }
+}
+
+
+console.log(horizon/2);
 
 multiplier.style.pointerEvents = 'none';
 autoclick.style.pointerEvents = 'none';
