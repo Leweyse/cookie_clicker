@@ -11,8 +11,11 @@ let count = 0;
 let increment = 1;
 let multiplierIndex = 2;
 let multiplierPrice = 100;
+let timerPrice = 75;
 
 let intervalAC = null;
+let intervalACT = null;
+let settimeoutAC = null;
 let intervalT = null;
 let settimeoutT = null;
 
@@ -38,7 +41,7 @@ run.addEventListener('click', function(){
         }
     }
 
-    if (l_timer.innerHTML !== "10 seconds") {
+    if (l_timer.innerHTML !== `${timerPrice} points to use bonus`) {
         timer.style.pointerEvents = 'none';
         timer.style.opacity = '0.4';
     }
@@ -67,25 +70,37 @@ multiplier.addEventListener('click', function(){
 
     multiplierIndex += 1;
 
-    l_multiplier.innerHTML = `${multiplierPrice} points for multiply by ${multiplierIndex}`
+    l_multiplier.innerHTML = `${multiplierPrice} points to increment by ${multiplierIndex}`
+    timerPrice = ((multiplierPrice * 3) / 4);
 
     if (multiplierIndex === 5) {
         autoclick.style.pointerEvents = "all";
         autoclick.style.opacity = '1';
+        l_autoclick.innerHTML = 'Autoclick in 10 seconds';
     }
 });
 
 autoclick.addEventListener('click', function(){
     clearInterval(intervalAC);
+
+    let autoclickRest = 9;
+
     intervalAC = setInterval(() => {
         run.click();
+        autoclickRest = 10;
     }, 10000);
+
+    intervalACT = setInterval(() => {
+        l_autoclick.innerHTML = `Autoclick in ${autoclickRest} seconds`;
+        autoclickRest -= 1;
+    }, 1000);
+
     autoclick.style.pointerEvents = "none";
     autoclick.style.opacity = '0.4';
-})
+});
 
 timer.addEventListener('click', function(){
-    l_timer.innerHTML = `10 seconds `;
+    l_timer.innerHTML = `10 seconds`;
 
     timer.style.pointerEvents = 'none';
     timer.style.opacity = '0.4';
@@ -104,14 +119,14 @@ timer.addEventListener('click', function(){
     settimeoutT = setTimeout(() => {
         clearInterval(intervalT);
         increment /= 2;
-        l_timer.innerHTML = `10 seconds`;
+        l_timer.innerHTML = `${timerPrice} points to use bonus`;
 
         if (count >= ((multiplierPrice * 3) / 4)) {
             timer.style.pointerEvents = "all";
             timer.style.opacity = "1";
         }
     }, 10000);
-})
+});
 
 function checkOpacity (params) {
     params.forEach(elem => {
