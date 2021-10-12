@@ -47,8 +47,8 @@ main {
     text-align: center;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 0.2fr;
-    
 }
+
 h1 {
     grid-row: 1 / 2;
     display: flex;
@@ -58,6 +58,7 @@ h1 {
     justify-content: center;
     flex-direction: column;
 }
+
 .counter {
     grid-row: 2 / 3;
     color: var(--clr-text-left);
@@ -81,10 +82,10 @@ footer {
 
 .right {
     grid-column: 2 / 3;
-    background-color: var(--bg-right);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+    background-color: var(--bg-right);
 }
 
 .top_right {
@@ -107,9 +108,9 @@ footer {
 }
 
 .bottom_right img {
+    grid-column: 1 / 2;
     position: relative;
     left: 50%;
-    grid-column: 1 / 2;
 }
 
 .bottom_right label {
