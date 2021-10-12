@@ -1,3 +1,4 @@
+const main = document.querySelector('.main');
 const run = document.getElementById('run');
 const counter = document.querySelector('.counter');
 const multiplier = document.getElementById('multiplier');
@@ -6,7 +7,6 @@ const timer = document.getElementById('timer');
 const l_multiplier = document.querySelector('.label_m')
 const l_autoclick = document.querySelector('.label_a')
 const l_timer = document.querySelector('.label_t')
-const aniFlower = document.getElementById('animateFlower')
 
 let count = 0;
 let increment = 1;
@@ -19,36 +19,6 @@ let intervalACT = null;
 let settimeoutAC = null;
 let intervalT = null;
 let settimeoutT = null;
-
-var id = null;
-var horizon = document.body.clientWidth;
-var vertical = document.body.clientHeight;
-let leftPoint = 0;
-let topPoint = 0;
-
-clearInterval(id);
-id_top = setInterval(frameTop, 5);
-function frameTop() {
-    if (topPoint == vertical - 80){
-        clearInterval(id_top)
-        aniFlower.style.display = 'none';
-    }else{
-        topPoint++;
-        aniFlower.style.top = topPoint + 'px';
-    }
-}
-id_left = setInterval(frameLeft, 5);
-function frameLeft() {
-    if (leftPoint == horizon/2 - 80){
-        clearInterval(id);
-    }else{
-        leftPoint++;
-        aniFlower.style.left = leftPoint + 'px'
-    }
-}
-
-
-console.log(horizon/2);
 
 multiplier.style.pointerEvents = 'none';
 autoclick.style.pointerEvents = 'none';
@@ -75,6 +45,39 @@ run.addEventListener('click', function(){
     if (l_timer.innerHTML !== `Get ${timerPrice} points to use bonus`) {
         timer.style.pointerEvents = 'none';
         timer.style.opacity = '0.4';
+    }
+
+    if (count % 50 === 0) {
+
+        let aniFlower = document.createElement('img');
+        aniFlower.setAttribute('id', 'animateFlower')
+        aniFlower.setAttribute('src', "https://img.icons8.com/office/80/000000/spa-flower.png")
+        main.appendChild(aniFlower);
+
+        let horizon = document.body.clientWidth;
+        let vertical = document.body.clientHeight;
+        let leftPoint = 0;
+        let topPoint = 0;
+
+        id_top = setInterval(() => {
+            if (topPoint == vertical - (aniFlower.clientHeight * 1.3)){
+                clearInterval(id_top)
+                aniFlower.style.display = 'none';
+            } else {
+                topPoint++;
+                aniFlower.style.top = topPoint + 'px';
+            }
+        }, 1);
+
+        id_left = setInterval(() => {
+            if (leftPoint == horizon / 2 - (aniFlower.clientWidth * 1.3)){
+                clearInterval(id_left);
+                aniFlower.style.display = 'none';
+            } else{
+                leftPoint++;
+                aniFlower.style.left = leftPoint + 'px'
+            }
+        }, 1);
     }
 });
 
