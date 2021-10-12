@@ -20,14 +20,14 @@ multiplier.style.pointerEvents = 'none';
 autoclick.style.pointerEvents = 'none';
 timer.style.pointerEvents = 'none';
 
-multiplier.style.opacity = '0.5';
-autoclick.style.opacity = '0.5';
-timer.style.opacity = '0.5';
+multiplier.style.opacity = '0.4';
+autoclick.style.opacity = '0.4';
+timer.style.opacity = '0.4';
 
 run.addEventListener('click', function(){
     count += increment;
     counter.innerHTML = count;
-    
+
     if (count >= ((multiplierPrice * 3) / 4)) {
         timer.style.pointerEvents = "all";
         timer.style.opacity = "1";
@@ -36,6 +36,11 @@ run.addEventListener('click', function(){
             multiplier.style.pointerEvents = 'all';
             multiplier.style.opacity = "1";
         }
+    }
+
+    if (l_timer.innerHTML !== "10 seconds") {
+        timer.style.pointerEvents = 'none';
+        timer.style.opacity = '0.4';
     }
 });
 
@@ -52,11 +57,11 @@ multiplier.addEventListener('click', function(){
 
     if (count < ((multiplierPrice * 3) / 4)) {
         timer.style.pointerEvents = "none";
-        timer.style.opacity = '0.5';
+        timer.style.opacity = '0.4';
 
         if (count < multiplierPrice) {
             multiplier.style.pointerEvents = 'none';
-            multiplier.style.opacity = '0.5';
+            multiplier.style.opacity = '0.4';
         }
     }
 
@@ -76,30 +81,50 @@ autoclick.addEventListener('click', function(){
         run.click();
     }, 10000);
     autoclick.style.pointerEvents = "none";
-    autoclick.style.opacity = '0.5';
+    autoclick.style.opacity = '0.4';
 })
 
 timer.addEventListener('click', function(){
-    let timeRest = 29;
+    l_timer.innerHTML = `10 seconds `;
+
+    timer.style.pointerEvents = 'none';
+    timer.style.opacity = '0.4';
+
+    let timeRest = 9;
     increment *= 2;
 
     clearInterval(intervalT);
     clearTimeout(settimeoutT);
 
-    l_timer.innerHTML = `30 seconds`;
-
     intervalT = setInterval(() => {
-        timer.style.pointerEvents = 'all';
-        timer.style.opacity = '1';
         l_timer.innerHTML = `${timeRest} seconds`;
         timeRest -= 1;
     }, 1000);
 
     settimeoutT = setTimeout(() => {
         clearInterval(intervalT);
-        timer.style.pointerEvents = 'none';
-        timer.style.opacity = '0.5';
         increment /= 2;
-        l_timer.innerHTML = `30 seconds`;
-    }, 30000);
+        l_timer.innerHTML = `10 seconds`;
+
+        if (count >= ((multiplierPrice * 3) / 4)) {
+            timer.style.pointerEvents = "all";
+            timer.style.opacity = "1";
+        }
+    }, 10000);
+})
+
+function checkOpacity (params) {
+    params.forEach(elem => {
+        if (elem.style.opacity == '0.4') {
+            elem.style.animation = 'none';
+        } else {
+            elem.style.animation = 'imgAnimation 5s infinite'
+        }
+    })
+}
+
+window.requestAnimationFrame(() => {
+    setInterval(() => {
+        checkOpacity([multiplier, autoclick, timer]);
+    }, 100);
 })
