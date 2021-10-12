@@ -41,7 +41,7 @@ run.addEventListener('click', function(){
         }
     }
 
-    if (l_timer.innerHTML !== `${timerPrice} points to use bonus`) {
+    if (l_timer.innerHTML !== `Get ${timerPrice} points to use bonus`) {
         timer.style.pointerEvents = 'none';
         timer.style.opacity = '0.4';
     }
@@ -70,7 +70,7 @@ multiplier.addEventListener('click', function(){
 
     multiplierIndex += 1;
 
-    l_multiplier.innerHTML = `${multiplierPrice} points to increment by ${multiplierIndex}`
+    l_multiplier.innerHTML = `Use ${multiplierPrice} points to increment by ${multiplierIndex}`
     timerPrice = ((multiplierPrice * 3) / 4);
 
     if (multiplierIndex === 5) {
@@ -100,7 +100,7 @@ autoclick.addEventListener('click', function(){
 });
 
 timer.addEventListener('click', function(){
-    l_timer.innerHTML = `10 seconds`;
+    l_timer.innerHTML = `10 seconds left`;
 
     timer.style.pointerEvents = 'none';
     timer.style.opacity = '0.4';
@@ -112,14 +112,14 @@ timer.addEventListener('click', function(){
     clearTimeout(settimeoutT);
 
     intervalT = setInterval(() => {
-        l_timer.innerHTML = `${timeRest} seconds`;
+        l_timer.innerHTML = `${timeRest} seconds left`;
         timeRest -= 1;
     }, 1000);
 
     settimeoutT = setTimeout(() => {
         clearInterval(intervalT);
         increment /= 2;
-        l_timer.innerHTML = `${timerPrice} points to use bonus`;
+        l_timer.innerHTML = `Get ${timerPrice} points to use bonus`;
 
         if (count >= ((multiplierPrice * 3) / 4)) {
             timer.style.pointerEvents = "all";
