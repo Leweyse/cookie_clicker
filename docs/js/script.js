@@ -112,3 +112,19 @@ timer.addEventListener('click', function(){
         }
     }, 10000);
 })
+
+function checkOpacity (params) {
+    params.forEach(elem => {
+        if (elem.style.opacity == '0.4') {
+            elem.style.animation = 'none';
+        } else {
+            elem.style.animation = 'imgAnimation 5s infinite'
+        }
+    })
+}
+
+window.requestAnimationFrame(() => {
+    setInterval(() => {
+        checkOpacity([multiplier, autoclick, timer]);
+    }, 100);
+})
